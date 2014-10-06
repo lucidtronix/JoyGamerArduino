@@ -36,23 +36,26 @@ void JoyGamer :: initialize()
   pinMode(speaker_pin, OUTPUT); 
   tft->initR(INITR_GREENTAB); // initialize a ST7735R chip, green tab
   stroke = Color(30, 34, 30);
-  background = Color(240, 240, 240);
-  tft->fillScreen(background.color_16());
+  background = Color(255, 255, 255);
+  clear_screen();
   tft->setTextColor(stroke.color_16());
+  draw_string(3, 4, "Joy Gamer" , stroke.color_16(), 2);
+  tft->setCursor(30, 110);
+  draw_string(30,105, "LucidTroniX", stroke.color_16(), 1);
 }
 
 void JoyGamer :: start_sd_card()
 {
   if (!SD.begin(sd_cs)) {
-    draw_string(12, 42, "SD Failed", Color(255,0,0).color_16());
+    draw_string(12, 28, "SD Failed", Color(255,0,0).color_16());
     return;
   }
-  draw_string(12,42, "SD GOOD", Color(0,255,0).color_16());
+  draw_string(12, 28, "SD GOOD", Color(0,200,0).color_16());
 }
 
 void JoyGamer :: show_accelerometer(int ax, int ay)
 {
-  tft->fillRect(ax, ay, 50, 40, ST7735_WHITE);
+  tft->fillRect(ax, ay, 50, 32, ST7735_WHITE);
   tft->setCursor(ax, ay);
   tft->print("X:");
   print_integer(ax+15, ay, accelerometer.getX(), 1, false);
@@ -119,7 +122,7 @@ void JoyGamer :: draw_string(int x, int y, String text)
   tft->print(text);
 }
 
-void JoyGamer :: print_integer(int ax, int ay, int to_print, int text_size, boolean hex=false)
+void JoyGamer :: print_integer(int ax, int ay, int to_print, int text_size, boolean hex)
 {
   tft->setTextColor(stroke.color_16());
   tft->setTextSize(text_size);

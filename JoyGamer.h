@@ -32,12 +32,12 @@ class JoyGamer
     void initialize();
     void show_accelerometer(int ax, int ay);
     
-    void clear_screen(Color=Color(0,0,0));
+    void clear_screen(Color=Color(255,255,255));
 
     void draw_string(int x, int y, String text, uint16_t color, int text_size);
     void draw_string(int x, int y, String text, uint16_t color);
     void draw_string(int x, int y, String text);
-    void print_integer(int ax, int ay, int to_print, int text_size, boolean hex);
+    void print_integer(int ax, int ay, int to_print, int text_size, boolean=false);
     void play_tone(int tone, int duration);
     void play_note(char note, int duration);
     
