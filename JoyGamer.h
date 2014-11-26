@@ -16,12 +16,22 @@
 #include "WProgram.h"
 #endif
 
+//#define USE_ACCELEROMETER
+//#define USE_COLOR
+
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
+
+#ifdef USE_COLOR
 #include <Color.h>
+#endif
+
 #include <SD.h>
+
+#ifdef USE_ACCELEROMETER
 #include <I2C.h>
 #include <MMA8453Q.h>
+#endif
 
 class JoyGamer
 {
@@ -30,10 +40,16 @@ class JoyGamer
     JoyGamer(Adafruit_ST7735 *a_tft);
 
     void initialize();
-    void show_accelerometer(int ax, int ay);
     
-    void clear_screen(Color=Color(255,255,255));
+    #ifdef USE_ACCELEROMETER
+    void show_accelerometer(int ax, int ay);
+    #endif
 
+    #ifdef USE_COLOR
+    void clear_screen(Color=Color(255,255,255));
+    #else
+    void clear_screen(uint16_t=0);
+    #endif
     void draw_string(int x, int y, String text, uint16_t color, int text_size);
     void draw_string(int x, int y, String text, uint16_t color);
     void draw_string(int x, int y, String text);
@@ -43,20 +59,26 @@ class JoyGamer
     
     void start_sd_card();
     void bmp_load_and_draw_image(String filename);
-
+    boolean bmp_read_header(File f);
+    void bmpdraw(File bitmap);
+    
+    #ifdef USE_COLOR
     Color background, stroke, fill;
-    int speaker_pin, btn_pin, joy_x, joy_y, sd_cs;
+    #endif
+    
+    int speaker_pin, joystick_btn_pin, btn_pin, joy_x, joy_y, sd_cs;
+
 
   private:
-    void bmpdraw();
-    boolean bmp_read_header(File f, int mode);
     uint32_t read32(File f); 
     uint16_t read16(File f);
-    File bmpFile1;
     int bmpWidth, bmpHeight;
     uint8_t bmpDepth, bmpImageoffset;
     Adafruit_ST7735 *tft;
+    
+    #ifdef USE_ACCELEROMETER
     MMA8453Q accelerometer;
+    #endif
 };
 
 #endif
