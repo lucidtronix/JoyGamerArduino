@@ -171,13 +171,13 @@ void JoyGamer :: bmp_load_and_draw_image(String filename)
      draw_string(12, 92, filename, ST7735_RED);
      return;
   }
-  bmpdraw(bmpFile1);
+  bmp_draw(bmpFile1);
   bmpFile1.close();
 }
 
 
 #define BUFFPIXEL 20
-void JoyGamer :: bmpdraw(File bitmap) 
+void JoyGamer :: bmp_draw(File bitmap) 
 {
   bitmap.seek(bmpImageoffset);
   unsigned int file_pos = bmpImageoffset;

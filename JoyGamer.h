@@ -16,8 +16,8 @@
 #include "WProgram.h"
 #endif
 
-//#define USE_ACCELEROMETER
-//#define USE_COLOR
+#define USE_ACCELEROMETER
+#define USE_COLOR
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
@@ -60,7 +60,7 @@ class JoyGamer
     void start_sd_card();
     void bmp_load_and_draw_image(String filename);
     boolean bmp_read_header(File f);
-    void bmpdraw(File bitmap);
+    void bmp_draw(File bitmap);
     
     #ifdef USE_COLOR
     Color background, stroke, fill;

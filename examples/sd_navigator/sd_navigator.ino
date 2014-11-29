@@ -67,11 +67,10 @@ void loop(){
       break;
     case DISPLAY_TEXT:
       jg.clear_screen(ST7735_WHITE);
-      jg.clear_screen();
       display_text_file();
       break;
     case DISPLAY_BITMAP:
-      jg.bmpdraw(cur_file);
+      jg.bmp_draw(cur_file);
       delay(2000);
       open_file("/");
       break;
@@ -133,7 +132,7 @@ void display_text_file(){
   tft.setTextColor(ST7735_BLACK);
   while(cur_file && cur_file.available() && aay < 150){
     char cur_c = cur_file.read();
-    if(cur_c == 10 || cur_c == 13 || (cur_c == ' ' && aax > 85)){
+    if(cur_c == 10 || cur_c == 13 || (cur_c == ' ' && aax > 65)){
       aay += line_height;
       aax = 2;
     }
@@ -152,6 +151,6 @@ void display_text_file(){
       break;
     }
   }
-  delay(1500);
+  delay(2500);
 }
 
