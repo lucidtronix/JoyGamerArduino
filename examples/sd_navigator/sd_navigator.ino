@@ -42,6 +42,12 @@ void setup(){
   jg.initialize();
   jg.start_sd_card();
   open_file("/");
+  
+  jg.draw_string(5, 6, "SD Card", ST7735_GREEN, 2);
+  jg.draw_string(2, 76, "navigator", ST7735_BLUE, 2);
+  
+  delay(2000);
+  jg.clear_screen(ST7735_WHITE);
 }
 
 void loop(){
@@ -50,14 +56,14 @@ void loop(){
       handle_cursor();
       for(int i = 0; i < cur_dir_files; i++){
         if(cursor_y > i*10+ 10 && cursor_y < i*10 + 20){
-          jg.draw_string(10, i*10 + 10, files[i], ST7735_MAGENTA);
+          jg.draw_string(10, i*10 + 10, files[i], ST7735_MAGENTA, 1);
           if(digitalRead(jg.joystick_btn_pin) == HIGH) {
             open_file(files[i]);
             break;
           }
         } 
         else {
-          jg.draw_string(10, i*10 + 10, files[i], ST7735_BLACK);
+          jg.draw_string(10, i*10 + 10, files[i], ST7735_BLACK, 1);
         }
         if(digitalRead(jg.btn_pin) == LOW && millis() - last_switch > 500) {
           open_file("/");
