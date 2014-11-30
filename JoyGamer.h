@@ -16,8 +16,8 @@
 #include "WProgram.h"
 #endif
 
-#define USE_ACCELEROMETER
-#define USE_COLOR
+//#define USE_ACCELEROMETER
+//#define USE_COLOR
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
