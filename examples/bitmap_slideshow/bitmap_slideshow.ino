@@ -26,9 +26,9 @@ Adafruit_ST7735  tft = Adafruit_ST7735(SS, 9, 8);
 JoyGamer jg = JoyGamer(&tft);
 
 int cur_pic = 0;
-const int num_pics = 29;
-String base_name = "face";
-String pic_name = base_name + "02.bmp";
+const int num_pics = 19;
+String base_name = "exp";
+String pic_name = base_name + "2.bmp";
 void setup(){
   jg.initialize();
   jg.clear_screen();
@@ -37,8 +37,7 @@ void setup(){
 
 void loop() {
  cur_pic = random(0, num_pics);
- if(cur_pic < 10) pic_name = base_name + String("0") + cur_pic + String(".bmp");
- else if(cur_pic < 100) pic_name = base_name + cur_pic + String(".bmp");
+ pic_name = base_name + cur_pic + String(".bmp");
  jg.bmp_load_and_draw_image(pic_name);
  delay(3000);
 }

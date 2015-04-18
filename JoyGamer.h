@@ -17,7 +17,7 @@
 #endif
 
 //#define USE_ACCELEROMETER
-//#define USE_COLOR
+#define USE_COLOR
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library
@@ -43,6 +43,7 @@ class JoyGamer
     
     #ifdef USE_ACCELEROMETER
     void show_accelerometer(int ax, int ay);
+    MMA8453Q accelerometer;
     #endif
 
     #ifdef USE_COLOR
@@ -68,7 +69,6 @@ class JoyGamer
     
     int speaker_pin, joystick_btn_pin, btn_pin, joy_x, joy_y, sd_cs;
 
-
   private:
     uint32_t read32(File f); 
     uint16_t read16(File f);
@@ -76,9 +76,7 @@ class JoyGamer
     uint8_t bmpDepth, bmpImageoffset;
     Adafruit_ST7735 *tft;
     
-    #ifdef USE_ACCELEROMETER
-    MMA8453Q accelerometer;
-    #endif
+
 };
 
 #endif
